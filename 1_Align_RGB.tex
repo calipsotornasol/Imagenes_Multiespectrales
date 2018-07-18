@@ -1,0 +1,1534 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{1\_Align\_RGB}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    This code uses the Python Open CV library to align red, green and blue
+band images in the format tif and combines them to produce an aligned
+RGB image in the format JPG. In addition, this code transfers the GPS
+information from the image in the reference band to the aligned RGB
+image.
+
+Extensions asociated to each name file refers to a diferente band as is
+detailed below
+
+\begin{itemize}
+\tightlist
+\item
+  '*\_1.tif' = Blue Band
+\item
+  '*\_2.tif' = Green Band
+\item
+  '*\_3.tif' = Red Band
+\item
+  '*\_4.tif' = Near Infrarred Band
+\item
+  '*\_5.tif' = Rededge Band
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Preamble}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline  
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{glob}
+        \PY{k+kn}{import} \PY{n+nn}{traceback}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}\PY{p}{,} \PY{n}{ImageFilter}
+        \PY{k+kn}{import} \PY{n+nn}{PIL}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{import} \PY{n+nn}{datetime}
+        \PY{n}{now} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{now}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2018-05-29 17:53:44.373389
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Setting directory}
+        \PY{n}{dir\PYZus{}set}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/tidchile/collaborative/udd/ids/agro/AGRIFRUT\PYZus{}10\PYZhy{}02/MICASENSE/0000SET/001}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{num\PYZus{}set}\PY{o}{=}\PY{n}{dir\PYZus{}set}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}Creating lists and listing blue band images }
+        \PY{n}{filenames}\PY{o}{=}\PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{dir\PYZus{}set}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/*.tif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{filenamesBLUE}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{n}{filenamesGREEN}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{n}{filenamesRED}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{filenames}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{filenames}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{83}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{filenamesBLUE}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{filenames}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+        \PY{n}{filenamesBLUE}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}        
+        \PY{n}{filenamesBLUE}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} ['/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0000\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0001\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0002\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0003\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0004\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0005\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0006\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0007\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0008\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0009\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0010\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0011\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0012\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0013\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0014\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0015\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0016\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0017\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0018\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0019\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0020\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0021\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0022\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0023\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0024\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0025\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0026\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0027\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0028\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0029\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0030\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0031\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0032\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0033\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0034\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0035\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0036\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0037\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0038\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0039\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0040\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0041\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0042\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0043\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0044\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0045\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0046\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0047\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0048\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0049\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0050\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0051\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0052\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0053\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0054\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0055\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0056\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0057\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0058\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0059\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0060\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0061\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0062\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0063\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0064\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0065\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0066\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0067\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0068\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0069\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0070\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0071\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0072\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0073\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0074\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0075\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0076\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0077\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0078\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0079\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0080\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0081\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0082\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0083\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0084\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0085\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0086\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0087\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0088\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0089\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0090\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0091\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0092\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0093\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0094\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0095\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0096\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0097\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0098\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0099\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0100\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0101\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0102\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0103\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0104\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0105\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0106\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0107\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0108\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0109\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0110\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0111\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0112\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0113\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0114\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0115\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0116\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0117\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0118\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0119\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0120\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0121\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0122\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0123\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0124\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0125\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0126\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0127\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0128\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0129\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0130\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0131\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0132\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0133\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0134\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0135\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0136\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0137\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0138\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0139\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0140\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0141\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0142\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0143\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0144\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0145\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0146\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0147\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0148\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0149\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0150\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0151\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0152\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0153\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0154\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0155\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0156\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0157\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0158\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0159\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0160\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0161\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0162\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0163\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0164\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0165\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0166\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0167\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0168\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0169\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0170\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0171\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0172\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0173\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0174\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0175\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0176\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0177\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0178\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0179\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0180\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0181\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0182\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0183\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0184\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0185\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0186\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0187\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0188\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0189\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0190\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0191\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0192\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0193\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0194\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0195\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0196\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0197\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0198\_1.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0199\_1.tif']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Listing green band images}
+        \PY{n}{filenamesGREEN}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{filenames}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{filenames}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{83}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{filenamesGREEN}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{filenames}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+        \PY{n}{filenamesGREEN}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}         
+        \PY{n}{filenamesGREEN}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} ['/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0000\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0001\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0002\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0003\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0004\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0005\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0006\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0007\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0008\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0009\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0010\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0011\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0012\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0013\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0014\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0015\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0016\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0017\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0018\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0019\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0020\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0021\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0022\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0023\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0024\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0025\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0026\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0027\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0028\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0029\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0030\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0031\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0032\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0033\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0034\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0035\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0036\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0037\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0038\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0039\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0040\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0041\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0042\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0043\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0044\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0045\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0046\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0047\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0048\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0049\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0050\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0051\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0052\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0053\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0054\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0055\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0056\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0057\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0058\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0059\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0060\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0061\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0062\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0063\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0064\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0065\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0066\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0067\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0068\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0069\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0070\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0071\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0072\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0073\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0074\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0075\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0076\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0077\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0078\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0079\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0080\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0081\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0082\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0083\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0084\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0085\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0086\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0087\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0088\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0089\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0090\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0091\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0092\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0093\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0094\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0095\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0096\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0097\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0098\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0099\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0100\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0101\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0102\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0103\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0104\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0105\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0106\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0107\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0108\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0109\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0110\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0111\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0112\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0113\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0114\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0115\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0116\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0117\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0118\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0119\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0120\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0121\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0122\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0123\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0124\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0125\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0126\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0127\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0128\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0129\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0130\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0131\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0132\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0133\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0134\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0135\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0136\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0137\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0138\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0139\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0140\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0141\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0142\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0143\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0144\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0145\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0146\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0147\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0148\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0149\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0150\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0151\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0152\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0153\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0154\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0155\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0156\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0157\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0158\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0159\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0160\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0161\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0162\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0163\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0164\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0165\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0166\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0167\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0168\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0169\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0170\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0171\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0172\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0173\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0174\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0175\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0176\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0177\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0178\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0179\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0180\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0181\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0182\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0183\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0184\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0185\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0186\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0187\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0188\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0189\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0190\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0191\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0192\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0193\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0194\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0195\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0196\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0197\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0198\_2.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0199\_2.tif']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Listing red band images}
+        \PY{n}{filenamesRED}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{filenames}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{filenames}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{83}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                
+                \PY{n}{filenamesRED}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{filenames}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+        \PY{n}{filenamesRED}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}          
+        \PY{n}{filenamesRED}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} ['/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0000\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0001\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0002\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0003\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0004\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0005\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0006\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0007\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0008\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0009\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0010\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0011\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0012\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0013\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0014\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0015\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0016\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0017\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0018\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0019\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0020\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0021\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0022\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0023\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0024\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0025\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0026\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0027\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0028\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0029\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0030\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0031\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0032\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0033\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0034\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0035\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0036\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0037\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0038\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0039\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0040\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0041\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0042\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0043\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0044\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0045\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0046\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0047\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0048\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0049\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0050\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0051\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0052\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0053\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0054\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0055\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0056\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0057\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0058\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0059\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0060\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0061\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0062\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0063\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0064\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0065\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0066\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0067\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0068\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0069\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0070\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0071\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0072\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0073\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0074\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0075\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0076\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0077\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0078\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0079\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0080\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0081\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0082\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0083\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0084\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0085\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0086\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0087\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0088\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0089\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0090\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0091\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0092\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0093\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0094\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0095\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0096\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0097\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0098\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0099\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0100\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0101\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0102\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0103\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0104\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0105\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0106\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0107\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0108\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0109\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0110\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0111\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0112\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0113\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0114\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0115\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0116\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0117\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0118\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0119\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0120\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0121\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0122\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0123\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0124\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0125\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0126\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0127\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0128\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0129\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0130\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0131\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0132\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0133\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0134\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0135\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0136\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0137\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0138\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0139\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0140\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0141\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0142\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0143\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0144\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0145\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0146\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0147\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0148\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0149\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0150\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0151\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0152\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0153\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0154\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0155\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0156\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0157\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0158\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0159\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0160\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0161\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0162\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0163\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0164\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0165\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0166\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0167\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0168\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0169\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0170\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0171\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0172\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0173\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0174\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0175\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0176\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0177\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0178\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0179\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0180\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0181\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0182\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0183\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0184\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0185\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0186\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0187\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0188\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0189\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0190\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0191\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0192\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0193\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0194\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0195\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0196\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0197\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0198\_3.tif',
+         '/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001/IMG\_0199\_3.tif']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Creating folder to save aligned images}
+        \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n}{dir\PYZus{}set}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}RGB\PYZus{}ALIGNED/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{dir\PYZus{}set}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}RGB\PYZus{}ALIGNED/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Preparing to align images}
+        \PY{c+c1}{\PYZsh{}Define motion model}
+        \PY{n}{warp\PYZus{}mode} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{MOTION\PYZus{}TRANSLATION}  \PY{c+c1}{\PYZsh{}(Options: MOTION\PYZus{}EUCLIDEAN, MOTION\PYZus{}AFFINE and MOTION\PYZus{}HOMOGRAPHY)}
+        \PY{c+c1}{\PYZsh{} Set the warp matrix to identity.}
+        \PY{k}{if} \PY{n}{warp\PYZus{}mode} \PY{o}{==} \PY{n}{cv2}\PY{o}{.}\PY{n}{MOTION\PYZus{}HOMOGRAPHY}\PY{p}{:}
+            \PY{n}{warp\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n}{warp\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Set the stopping criteria for the algorithm.}
+        \PY{n}{criteria} \PY{o}{=} \PY{p}{(}\PY{n}{cv2}\PY{o}{.}\PY{n}{TERM\PYZus{}CRITERIA\PYZus{}EPS} \PY{o}{|} \PY{n}{cv2}\PY{o}{.}\PY{n}{TERM\PYZus{}CRITERIA\PYZus{}COUNT}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{,}  \PY{l+m+mf}{1e\PYZhy{}5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{dir\PYZus{}rgb}\PY{o}{=}\PY{n}{dir\PYZus{}set}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}RGB\PYZus{}ALIGNED/}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{dir\PYZus{}rgb}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/tidchile/collaborative/udd/ids/agro/AGRIFRUT\_10-02/MICASENSE/0000SET/001\_RGB\_ALIGNED/
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Aligning images and saving as .JPG}
+         
+         \PY{c+c1}{\PYZsh{}Creating log file. List images which were not aligned}
+         \PY{n}{log} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{dir\PYZus{}rgb} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error\PYZus{}align.log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{filenamesRED}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Processing: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{filenamesBLUE}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{74}\PY{p}{:}\PY{l+m+mi}{82}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{im\PYZus{}blue}        \PY{o}{=}  \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{filenamesBLUE}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+                 \PY{n}{im\PYZus{}green}       \PY{o}{=}  \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{filenamesGREEN}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+                 \PY{n}{im\PYZus{}red}         \PY{o}{=}  \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{filenamesRED}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+                       
+             
+                 \PY{n}{sz} \PY{o}{=} \PY{n}{im\PYZus{}blue}\PY{o}{.}\PY{n}{shape}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{n}{sz}\PY{p}{)}
+                 \PY{n}{height} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{sz}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{width} \PY{o}{=} \PY{n}{sz}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             
+                 \PY{n}{im\PYZus{}aligned} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{height}\PY{p}{,}\PY{n}{width}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint8} \PY{p}{)}
+                 \PY{n}{im\PYZus{}aligned}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{im\PYZus{}red}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             
+                 \PY{c+c1}{\PYZsh{}Blue (Aligning Blue)}
+                 \PY{p}{(}\PY{n}{cc}\PY{p}{,} \PY{n}{warp\PYZus{}matrix}\PY{p}{)} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{findTransformECC} \PY{p}{(}\PY{n}{im\PYZus{}red}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{im\PYZus{}blue}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{warp\PYZus{}matrix}\PY{p}{,} \PY{n}{warp\PYZus{}mode}\PY{p}{,} \PY{n}{criteria}\PY{p}{)}
+             
+                 \PY{n}{im\PYZus{}aligned}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{warpAffine}\PY{p}{(}\PY{n}{im\PYZus{}blue}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{warp\PYZus{}matrix}\PY{p}{,} \PY{p}{(}\PY{n}{width}\PY{p}{,} \PY{n}{height}\PY{p}{)}\PY{p}{,} \PY{n}{flags}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{INTER\PYZus{}LINEAR} \PY{o}{+} \PY{n}{cv2}\PY{o}{.}\PY{n}{WARP\PYZus{}INVERSE\PYZus{}MAP}\PY{p}{)}\PY{p}{;}
+             
+                 \PY{c+c1}{\PYZsh{}Green (Aligning Green)}
+                 \PY{p}{(}\PY{n}{cc}\PY{p}{,} \PY{n}{warp\PYZus{}matrix}\PY{p}{)} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{findTransformECC} \PY{p}{(}\PY{n}{im\PYZus{}red}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{im\PYZus{}green}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{warp\PYZus{}matrix}\PY{p}{,} \PY{n}{warp\PYZus{}mode}\PY{p}{,} \PY{n}{criteria}\PY{p}{)}
+             
+                 \PY{n}{im\PYZus{}aligned}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{warpAffine}\PY{p}{(}\PY{n}{im\PYZus{}green}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{warp\PYZus{}matrix}\PY{p}{,} \PY{p}{(}\PY{n}{width}\PY{p}{,} \PY{n}{height}\PY{p}{)}\PY{p}{,} \PY{n}{flags}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{INTER\PYZus{}LINEAR} \PY{o}{+} \PY{n}{cv2}\PY{o}{.}\PY{n}{WARP\PYZus{}INVERSE\PYZus{}MAP}\PY{p}{)}\PY{p}{;}
+                 \PY{n}{cv2}\PY{o}{.}\PY{n}{imwrite}\PY{p}{(}\PY{n}{dir\PYZus{}rgb} \PY{o}{+} \PY{n}{filenamesBLUE}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{74}\PY{p}{:}\PY{l+m+mi}{82}\PY{p}{]}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}RGB.JPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{im\PYZus{}aligned}\PY{p}{)}
+             \PY{k}{except} \PY{n+ne}{Exception}\PY{p}{:} 
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error processing: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{filenamesBLUE}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{74}\PY{p}{:}\PY{l+m+mi}{82}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{log}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error processing: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{filenamesBLUE}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{74}\PY{p}{:}\PY{l+m+mi}{82}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{continue}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Processing: IMG\_0000
+(960, 1280)
+Processing: IMG\_0001
+(960, 1280)
+Processing: IMG\_0002
+(960, 1280)
+Processing: IMG\_0003
+(960, 1280)
+Processing: IMG\_0004
+(960, 1280)
+Processing: IMG\_0005
+(960, 1280)
+Processing: IMG\_0006
+(960, 1280)
+Processing: IMG\_0007
+(960, 1280)
+Processing: IMG\_0008
+(960, 1280)
+Processing: IMG\_0009
+(960, 1280)
+Processing: IMG\_0010
+(960, 1280)
+Processing: IMG\_0011
+(960, 1280)
+Processing: IMG\_0012
+(960, 1280)
+Processing: IMG\_0013
+(960, 1280)
+Processing: IMG\_0014
+(960, 1280)
+Processing: IMG\_0015
+(960, 1280)
+Processing: IMG\_0016
+(960, 1280)
+Processing: IMG\_0017
+(960, 1280)
+Processing: IMG\_0018
+(960, 1280)
+Processing: IMG\_0019
+(960, 1280)
+Processing: IMG\_0020
+(960, 1280)
+Processing: IMG\_0021
+(960, 1280)
+Processing: IMG\_0022
+(960, 1280)
+Processing: IMG\_0023
+(960, 1280)
+Processing: IMG\_0024
+(960, 1280)
+Processing: IMG\_0025
+(960, 1280)
+Processing: IMG\_0026
+(960, 1280)
+Processing: IMG\_0027
+(960, 1280)
+Processing: IMG\_0028
+(960, 1280)
+Processing: IMG\_0029
+(960, 1280)
+Processing: IMG\_0030
+(960, 1280)
+Processing: IMG\_0031
+(960, 1280)
+Processing: IMG\_0032
+(960, 1280)
+Processing: IMG\_0033
+(960, 1280)
+Processing: IMG\_0034
+(960, 1280)
+Processing: IMG\_0035
+(960, 1280)
+Processing: IMG\_0036
+(960, 1280)
+Processing: IMG\_0037
+(960, 1280)
+Processing: IMG\_0038
+(960, 1280)
+Processing: IMG\_0039
+(960, 1280)
+Processing: IMG\_0040
+(960, 1280)
+Processing: IMG\_0041
+(960, 1280)
+Processing: IMG\_0042
+(960, 1280)
+Processing: IMG\_0043
+(960, 1280)
+Processing: IMG\_0044
+(960, 1280)
+Processing: IMG\_0045
+(960, 1280)
+Processing: IMG\_0046
+(960, 1280)
+Processing: IMG\_0047
+(960, 1280)
+Processing: IMG\_0048
+(960, 1280)
+Processing: IMG\_0049
+(960, 1280)
+Processing: IMG\_0050
+(960, 1280)
+Processing: IMG\_0051
+(960, 1280)
+Processing: IMG\_0052
+(960, 1280)
+Processing: IMG\_0053
+(960, 1280)
+Processing: IMG\_0054
+(960, 1280)
+Processing: IMG\_0055
+(960, 1280)
+Processing: IMG\_0056
+(960, 1280)
+Processing: IMG\_0057
+(960, 1280)
+Processing: IMG\_0058
+(960, 1280)
+Processing: IMG\_0059
+(960, 1280)
+Processing: IMG\_0060
+(960, 1280)
+Processing: IMG\_0061
+(960, 1280)
+Processing: IMG\_0062
+(960, 1280)
+Processing: IMG\_0063
+(960, 1280)
+Processing: IMG\_0064
+(960, 1280)
+Processing: IMG\_0065
+(960, 1280)
+Processing: IMG\_0066
+(960, 1280)
+Processing: IMG\_0067
+(960, 1280)
+Processing: IMG\_0068
+(960, 1280)
+Processing: IMG\_0069
+(960, 1280)
+Processing: IMG\_0070
+(960, 1280)
+Processing: IMG\_0071
+(960, 1280)
+Processing: IMG\_0072
+(960, 1280)
+Processing: IMG\_0073
+(960, 1280)
+Processing: IMG\_0074
+(960, 1280)
+Processing: IMG\_0075
+(960, 1280)
+Processing: IMG\_0076
+(960, 1280)
+Processing: IMG\_0077
+(960, 1280)
+Processing: IMG\_0078
+(960, 1280)
+Processing: IMG\_0079
+(960, 1280)
+Processing: IMG\_0080
+(960, 1280)
+Processing: IMG\_0081
+(960, 1280)
+Processing: IMG\_0082
+(960, 1280)
+Processing: IMG\_0083
+(960, 1280)
+Processing: IMG\_0084
+(960, 1280)
+Processing: IMG\_0085
+(960, 1280)
+Processing: IMG\_0086
+(960, 1280)
+Processing: IMG\_0087
+(960, 1280)
+Processing: IMG\_0088
+(960, 1280)
+Processing: IMG\_0089
+(960, 1280)
+Processing: IMG\_0090
+(960, 1280)
+Processing: IMG\_0091
+(960, 1280)
+Processing: IMG\_0092
+(960, 1280)
+Processing: IMG\_0093
+(960, 1280)
+Processing: IMG\_0094
+(960, 1280)
+Processing: IMG\_0095
+(960, 1280)
+Processing: IMG\_0096
+(960, 1280)
+Processing: IMG\_0097
+(960, 1280)
+Processing: IMG\_0098
+(960, 1280)
+Processing: IMG\_0099
+(960, 1280)
+Processing: IMG\_0100
+(960, 1280)
+Processing: IMG\_0101
+(960, 1280)
+Processing: IMG\_0102
+(960, 1280)
+Processing: IMG\_0103
+(960, 1280)
+Processing: IMG\_0104
+(960, 1280)
+Processing: IMG\_0105
+(960, 1280)
+Processing: IMG\_0106
+(960, 1280)
+Processing: IMG\_0107
+(960, 1280)
+Processing: IMG\_0108
+(960, 1280)
+Processing: IMG\_0109
+(960, 1280)
+Processing: IMG\_0110
+(960, 1280)
+Processing: IMG\_0111
+(960, 1280)
+Processing: IMG\_0112
+(960, 1280)
+Processing: IMG\_0113
+(960, 1280)
+Processing: IMG\_0114
+(960, 1280)
+Processing: IMG\_0115
+(960, 1280)
+Processing: IMG\_0116
+(960, 1280)
+Processing: IMG\_0117
+(960, 1280)
+Processing: IMG\_0118
+(960, 1280)
+Processing: IMG\_0119
+(960, 1280)
+Processing: IMG\_0120
+(960, 1280)
+Processing: IMG\_0121
+(960, 1280)
+Processing: IMG\_0122
+(960, 1280)
+Processing: IMG\_0123
+(960, 1280)
+Processing: IMG\_0124
+(960, 1280)
+Processing: IMG\_0125
+(960, 1280)
+Processing: IMG\_0126
+(960, 1280)
+Processing: IMG\_0127
+(960, 1280)
+Processing: IMG\_0128
+(960, 1280)
+Processing: IMG\_0129
+(960, 1280)
+Processing: IMG\_0130
+(960, 1280)
+Processing: IMG\_0131
+(960, 1280)
+Processing: IMG\_0132
+(960, 1280)
+Processing: IMG\_0133
+(960, 1280)
+Processing: IMG\_0134
+(960, 1280)
+Processing: IMG\_0135
+(960, 1280)
+Processing: IMG\_0136
+(960, 1280)
+Processing: IMG\_0137
+(960, 1280)
+Processing: IMG\_0138
+(960, 1280)
+Processing: IMG\_0139
+(960, 1280)
+Processing: IMG\_0140
+(960, 1280)
+Processing: IMG\_0141
+(960, 1280)
+Processing: IMG\_0142
+(960, 1280)
+Processing: IMG\_0143
+(960, 1280)
+Processing: IMG\_0144
+(960, 1280)
+Processing: IMG\_0145
+(960, 1280)
+Processing: IMG\_0146
+(960, 1280)
+Processing: IMG\_0147
+(960, 1280)
+Processing: IMG\_0148
+(960, 1280)
+Processing: IMG\_0149
+(960, 1280)
+Processing: IMG\_0150
+(960, 1280)
+Processing: IMG\_0151
+(960, 1280)
+Processing: IMG\_0152
+(960, 1280)
+Processing: IMG\_0153
+(960, 1280)
+Processing: IMG\_0154
+(960, 1280)
+Processing: IMG\_0155
+(960, 1280)
+Processing: IMG\_0156
+(960, 1280)
+Processing: IMG\_0157
+(960, 1280)
+Processing: IMG\_0158
+(960, 1280)
+Processing: IMG\_0159
+(960, 1280)
+Processing: IMG\_0160
+(960, 1280)
+Processing: IMG\_0161
+(960, 1280)
+Processing: IMG\_0162
+(960, 1280)
+Processing: IMG\_0163
+(960, 1280)
+Processing: IMG\_0164
+(960, 1280)
+Processing: IMG\_0165
+(960, 1280)
+Processing: IMG\_0166
+(960, 1280)
+Processing: IMG\_0167
+(960, 1280)
+Processing: IMG\_0168
+(960, 1280)
+Processing: IMG\_0169
+(960, 1280)
+Processing: IMG\_0170
+(960, 1280)
+Processing: IMG\_0171
+(960, 1280)
+Processing: IMG\_0172
+(960, 1280)
+Processing: IMG\_0173
+(960, 1280)
+Processing: IMG\_0174
+(960, 1280)
+Processing: IMG\_0175
+(960, 1280)
+Processing: IMG\_0176
+(960, 1280)
+Processing: IMG\_0177
+(960, 1280)
+Processing: IMG\_0178
+(960, 1280)
+Processing: IMG\_0179
+(960, 1280)
+Processing: IMG\_0180
+(960, 1280)
+Processing: IMG\_0181
+(960, 1280)
+Processing: IMG\_0182
+(960, 1280)
+Processing: IMG\_0183
+(960, 1280)
+Processing: IMG\_0184
+(960, 1280)
+Processing: IMG\_0185
+(960, 1280)
+Processing: IMG\_0186
+(960, 1280)
+Processing: IMG\_0187
+(960, 1280)
+Processing: IMG\_0188
+(960, 1280)
+Processing: IMG\_0189
+(960, 1280)
+Processing: IMG\_0190
+(960, 1280)
+Processing: IMG\_0191
+(960, 1280)
+Processing: IMG\_0192
+(960, 1280)
+Processing: IMG\_0193
+(960, 1280)
+Processing: IMG\_0194
+(960, 1280)
+Processing: IMG\_0195
+(960, 1280)
+Processing: IMG\_0196
+(960, 1280)
+Processing: IMG\_0197
+(960, 1280)
+Processing: IMG\_0198
+(960, 1280)
+Processing: IMG\_0199
+(960, 1280)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{o}{!}ls
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+000		      005	       010\_RGB\_ALIGNED
+000\_IR-REDGE\_ALIGNED  005\_RGB\_ALIGNED  Align\_RGB\_1.ipynb
+000\_RGB\_ALIGNED       006	       Align\_RGB\_2.ipynb
+001		      006\_RGB\_ALIGNED  Align\_RGB\_3\_NIRR.ipynb
+001\_RGB\_ALIGNED       007	       Align\_RGB\_4\_NIRRE.ipynb
+002		      007\_RGB\_ALIGNED  IMG\_0001\_1.tif
+002\_RGB\_ALIGNED       008	       Untitled.ipynb
+003		      008\_RGB\_ALIGNED  Untitled1.ipynb
+003\_RGB\_ALIGNED       009	       diag.dat
+004		      009\_RGB\_ALIGNED  paramlog.dat
+004\_RGB\_ALIGNED       010
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}Copy information from red images (*\PYZus{}3.tif) with Exiftool. I aligning using as a reference the red band. }
+         \PY{c+c1}{\PYZsh{}If you align using another band as a reference you have to use the images with }
+         \PY{c+c1}{\PYZsh{}the correct extension.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}dir\PYZus{}set}\PY{l+s+s2}{\PYZdq{}} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}dir\PYZus{}rgb}\PY{l+s+s2}{\PYZdq{}} 
+        
+        \PY{n+nv}{dir}\PY{o}{=}\PY{k}{\PYZdl{}(}\PY{n+nb}{pwd}\PY{k}{)}
+        
+        \PY{n+nv}{dir\PYZus{}set}\PY{o}{=}\PY{n+nv}{\PYZdl{}1}/
+        \PY{n+nv}{dir\PYZus{}rgb}\PY{o}{=}\PY{n+nv}{\PYZdl{}2}
+        
+        \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}dir\PYZus{}rgb}
+        
+        ls \PY{n+nv}{\PYZdl{}dir\PYZus{}rgb}*.JPG \PY{p}{|} xargs \PYZhy{}n \PY{l+m}{1} basename \PYZgt{} \PY{l+s+si}{\PYZdl{}\PYZob{}}\PY{n+nv}{dir\PYZus{}rgb}\PY{l+s+si}{\PYZcb{}}rgb\PYZus{}files.txt
+        
+        \PY{k}{for} f in \PY{l+s+sb}{`}cat \PY{l+s+si}{\PYZdl{}\PYZob{}}\PY{n+nv}{dir\PYZus{}rgb}\PY{l+s+si}{\PYZcb{}}rgb\PYZus{}files.txt\PY{l+s+sb}{`}\PY{p}{;}
+        \PY{k}{do} 
+        \PY{n+nv}{aa}\PY{o}{=}\PY{n+nv}{\PYZdl{}dir\PYZus{}set}\PY{l+s+si}{\PYZdl{}\PYZob{}}\PY{n+nv}{f}\PY{p}{:}\PY{n+nv}{0}\PY{p}{:}\PY{n+nv}{8}\PY{l+s+si}{\PYZcb{}}\PYZus{}3.tif
+        \PY{n+nv}{bb}\PY{o}{=}\PY{n+nv}{\PYZdl{}dir\PYZus{}rgb}\PY{n+nv}{\PYZdl{}f}
+        
+        \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}aa}
+        \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}bb}
+        exiftool −overwrite\PYZus{}original\PYZus{}in\PYZus{}place \PYZhy{}r \PYZhy{}tagsFromFile \PY{n+nv}{\PYZdl{}aa} \PYZhy{}gps:all \PYZhy{}ExifIFD:all \PY{n+nv}{\PYZdl{}bb}\PY{p}{;} 
+        \PY{k}{done}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{now} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{now}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2018-05-29 18:29:54.182722
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
